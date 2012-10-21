@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.mockremote</groupId>
+        <artifactId>mockremote-pom</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.mockremote</groupId>
+    <artifactId>spring-agent</artifactId>
+    <packaging>jar</packaging>
+
+    <name>MockRemote Spring JavaAgent</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.mockremote</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>asm</groupId>
+            <artifactId>asm</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <finalName>mockremote-spring</finalName>
+                            <descriptors>
+                                <descriptor>agent-assembly.xml</descriptor>
+                            </descriptors>
+                            <archive>
+                                <manifestEntries>
+                                    <Premain-Class>org.mockremote.spring.MockRemoteJavaAgent</Premain-Class>
+                                </manifestEntries>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
